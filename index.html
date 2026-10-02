@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Cá Nhân - Kiều Quang Anh</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* --- 1. CẤU HÌNH CHUNG & BỐ CỤC TOÀN TRANG --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #0d1117; /* Màu nền tối hiện đại */
+        background-image:
+          radial-gradient(
+            circle at 10% 20%,
+            rgba(56, 189, 248, 0.15) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 90% 80%,
+            rgba(139, 92, 246, 0.15) 0%,
+            transparent 40%
+          );
+        padding: 40px 20px;
+        color: #e2e8f0;
+      }
+
+      /* --- 2. KHUNG PROFILE CHÍNH (RỘNG VÀ CÂN ĐỐI) --- */
+      .profile-card {
+        width: 100%;
+        max-width: 850px; /* Độ rộng chuẩn cho màn hình máy tính */
+        background: rgba(22, 27, 34, 0.8);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      }
+
+      /* --- 3. PHẦN ĐẦU: AVATAR & TÊN --- */
+      .header {
+        text-align: center;
+        padding-bottom: 30px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 30px;
+      }
+
+      .avatar-box {
+        position: relative;
+        width: 130px;
+        height: 130px;
+        margin: 0 auto 20px;
+      }
+
+      .avatar-box img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #38bdf8;
+        box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+      }
+
+      .user-name {
+        font-size: 28px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 8px;
+      }
+
+      .user-bio {
+        font-size: 15px;
+        color: #38bdf8;
+        font-weight: 500;
+        margin-bottom: 20px;
+      }
+
+      /* Nút Mạng Xã Hội */
+      .social-group {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .social-link {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #38bdf8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 18px;
+        transition: all 0.3s ease;
+      }
+
+      .social-link:hover {
+        background: #38bdf8;
+        color: #0d1117;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+      }
+
+      /* --- 4. BỐ CỤC LƯỚI 2 CỘT --- */
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      /* Tự động chuyển 1 cột trên điện thoại */
+      @media (max-width: 650px) {
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+        .full-width {
+          grid-column: span 1 !important;
+        }
+      }
+
+      .info-box {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        padding: 24px;
+      }
+
+      .full-width {
+        grid-column: span 2;
+      }
+
+      .box-title {
+        font-size: 15px;
+        color: #38bdf8;
+        font-weight: 600;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .data-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+        font-size: 14px;
+      }
+
+      .data-row:last-child {
+        border-bottom: none;
+      }
+
+      .data-row span {
+        color: #94a3b8;
+      }
+      .data-row strong {
+        color: #f1f5f9;
+      }
+
+      .list-item {
+        list-style: none;
+      }
+
+      .list-item li {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #cbd5e1;
+      }
+
+      .list-item li::before {
+        content: "▹";
+        position: absolute;
+        left: 0;
+        color: #38bdf8;
+      }
+
+      /* --- 5. THANH NHẠC NỀN --- */
+      .player-bar {
+        margin-top: 24px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 14px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .play-btn {
+        background: #38bdf8;
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        color: #0d1117;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.2s;
+      }
+
+      .play-btn:hover {
+        transform: scale(1.08);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="profile-card">
+      <div class="header">
+        <div class="avatar-box">
+          <img
+            src="https://i.postimg.cc/GpSxvYkv/anhprofile.jpg"
+            alt="Ảnh đại diện"
+          />
+        </div>
+
+        <h1 class="user-name">Kiều Quang Anh</h1>
+        <p class="user-bio">Học sinh Đam mê Tin & Lập trình thi đấu</p>
+
+        <div class="social-group">
+          <a
+            href="https://www.facebook.com/share/19QchBJcbx/"
+            target="_blank"
+            class="social-link"
+            title="Facebook"
+          >
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+
+          <a
+            href="https://github.com/thay-link-github"
+            target="_blank"
+            class="social-link"
+            title="GitHub"
+          >
+            <i class="fa-brands fa-github"></i>
+          </a>
+
+          <a
+            href="https://m.me/thay-link-messenger"
+            target="_blank"
+            class="social-link"
+            title="Messenger"
+          >
+            <i class="fa-brands fa-facebook-messenger"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="box-title">
+            <i class="fa-solid fa-id-card"></i> Thông tin cá nhân
+          </div>
+          <div class="data-row"><span>Tuổi:</span> <strong>16</strong></div>
+          <div class="data-row">
+            <span>Ngày sinh:</span> <strong>11/05/2010</strong>
+          </div>
+          <div class="data-row"><span>Lớp:</span> <strong>11A2</strong></div>
+          <div class="data-row">
+            <span>Trường:</span> <strong>THPT Bất Bạt</strong>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <div class="box-title">
+            <i class="fa-solid fa-award"></i> Thành tích nổi bật
+          </div>
+          <ul class="list-item">
+            <li>Giải Nhì Học sinh giỏi Tin 9 Cấp Huyện (2024-2025)</li>
+            <li>
+              Giải Khuyến Khích Học sinh giỏi Tin 9 Cấp Thành Phố (2024-2025)
+            </li>
+            <li>Giải Nhì Học sinh giỏi Tin 10 Cấp Trường (2025-2026)</li>
+          </ul>
+        </div>
+
+        <div class="info-box full-width">
+          <div class="box-title">
+            <i class="fa-solid fa-laptop-code"></i> Định hướng phát triển
+          </div>
+          <ul class="list-item">
+            <li>Chuyên sâu Toán học và Tin học ứng dụng</li>
+            <li>Thành thạo lập trình thuật toán & Competitive Programming</li>
+            <li>Phát triển các dự án phần mềm cá nhân</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="player-bar">
+        <span style="font-size: 13px; color: #94a3b8"
+          ><i class="fa-solid fa-music"></i> Nhạc nền Chill Lo-Fi</span
+        >
+        <button class="play-btn" onclick="controlAudio()">
+          <i class="fa-solid fa-play" id="btnIcon"></i>
+        </button>
+
+        <audio
+          id="audioPlayer"
+          loop
+          src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        ></audio>
+      </div>
+    </div>
+
+    <script>
+      const audio = document.getElementById("audioPlayer");
+      const icon = document.getElementById("btnIcon");
+
+      function controlAudio() {
+        if (audio.paused) {
+          audio.play();
+          icon.className = "fa-solid fa-pause";
+        } else {
+          audio.pause();
+          icon.className = "fa-solid fa-play";
+        }
+      }
+    </script>
+  </body>
+</html>
